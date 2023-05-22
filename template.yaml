@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+  PostReward:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: app.new_reward
+      Runtime: python3.9
+      CodeUri: rewards/
+      Events:
+        Rewards:
+          Type: Api
+          Properties:
+            Path: /rewards
+            Method: POST
+  UpdateReward:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: app.update_reward
+      Runtime: python3.9
+      CodeUri: rewards/
+      Events:
+        Rewards:
+          Type: Api
+          Properties:
+            Path: /rewardupdate
+            Method: POST
+  DeleteReward:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: app.delete_reward
+      Runtime: python3.9
+      CodeUri: rewards/
+      Events:
+        Rewards:
+          Type: Api
+          Properties:
+            Path: /rewarddelete
+            Method: POST
+  RewardsList:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: app.rewards_list
+      Runtime: python3.9
+      CodeUri: rewards/
+      Events:
+        Rewards:
+          Type: Api
+          Properties:
+            Path: /rewards
+            Method: GET
+  RegisterUser:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: app.register
+      Runtime: python3.9
+      CodeUri: users/
+      Events:
+        Rewards:
+          Type: Api
+          Properties:
+            Path: /users
+            Method: POST
+  Login:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: app.login
+      Runtime: python3.9
+      CodeUri: users/
+      Events:
+        Rewards:
+          Type: Api
+          Properties:
+            Path: /login
+            Method: POST
+  CheckToken:
+    Type: "AWS::Serverless::Function"
+    Properties:
+      Handler: app.check_token
+      Runtime: python3.9
+      CodeUri: users/
+      Events:
+        Rewards:
+          Type: Api
+          Properties:
+            Path: /token
+            Method: POST
